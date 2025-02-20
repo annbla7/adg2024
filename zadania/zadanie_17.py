@@ -16,12 +16,14 @@ def xy_from_colrow(raster, column, row):
     x_res = raster.rasterUnitsPerPixelX()
     y_res = raster.rasterUnitsPerPixelY()
     #sprawdzenie czy parametry nie wychodzą poza zasięg rastra
-    if column > x_max  or row > y_max:
+    cols = raster.width()
+    rows = raster.height() 
+    if column < 0 or column >= cols or row < 0 or row >= rows:
         print("Parametry wychodzą poza zasięg rastra.")
     else:
         x = x_min + (column + 0.5) * x_res
         y = y_max - (row + 0.5) * y_res
-    return x, y
+        return x, y
 
 xy_from_colrow(raster, 17, 30)
 
@@ -35,11 +37,11 @@ def colrow_from_xy(raster, x, y):
     x_res = raster.rasterUnitsPerPixelX()
     y_res = raster.rasterUnitsPerPixelY()
     #sprawdzenie czy parametry nie wychodzą poza zasięg rastra
-    if x > x_max  or y > y_max:
+    if x < x_min or x > x_max or y < y_min or y > y_max:
         print("Parametry wychodzą poza zasięg rastra.")
     else:
         column = math.floor((x - x_min) / x_res)
         row = math.floor((y_max - y) / y_res)
-    return column, row
+        return column, row
     
-colrow_from_xy(raster, 4, 2)
+colrow_from_xy(raster, 290043, 600028)
