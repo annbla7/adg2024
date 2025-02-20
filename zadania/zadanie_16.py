@@ -7,7 +7,7 @@ os.chdir(path)
 
 profil_csv = "profil.csv"
 
-def surface_distance(file):
+def surface_distance(profil_csv):
     points = []
     with open(profil_csv, newline='', encoding='utf-8') as file:
         reader = csv.reader(file)
@@ -19,7 +19,7 @@ def surface_distance(file):
     for i in range(len(points) - 1):
         x1, y1, z1 = points[i]
         x2, y2, z2 = points[i + 1]
-        total_distance = math.sqrt((x2 - x1)**2 + (y2 - y1)**2 + (z2 - z1)**2)
+        total_distance += math.sqrt((x2 - x1)**2 + (y2 - y1)**2 + (z2 - z1)**2)
     return round(total_distance, 2)
 
 surface_distance(profil_csv)
