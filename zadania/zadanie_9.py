@@ -1,5 +1,12 @@
+import os
+
+path = os.path.join(os.path.expanduser("~"), "Documents", "algorytmy")
+os.chdir(path)
+
 wektor = "powiaty.gpkg"
 powiaty = QgsVectorLayer(wektor, "powiaty", "ogr")
+
+powiaty.crs() #sprawdzenie układu współrzędnych warstwy wejściowej
 
 pola = [
     QgsField("ID", QVariant.Int),
@@ -7,7 +14,7 @@ pola = [
     QgsField("centroid_y", QVariant.Double)
 ]
 
-centroidy = QgsVectorLayer("Point?crs=EPSG:4326", "centroidy", "memory")
+centroidy = QgsVectorLayer("Point?crs=EPSG:2180", "centroidy", "memory")
 provider = centroidy.dataProvider()
 
 provider.addAttributes(pola)
